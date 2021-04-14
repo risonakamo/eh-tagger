@@ -1,0 +1,12 @@
+[package]
+name="eh-tagger"
+version="0.0.0"
+edition="2018"
+
+[[bin]]
+name="eh-tagger"
+path="eh-tagger.rs"
+
+[dependencies]
+rocket="0.4.7"
+rocket_contrib={version="0.4.7",features=["json"]}
