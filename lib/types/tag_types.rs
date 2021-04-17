@@ -4,6 +4,8 @@
 use std::collections::HashMap;
 use serde::{Deserialize,Serialize};
 
+use super::entry_data_types::EntryData;
+
 /** key: tag name, val: tag present or not */
 pub type TagSet=HashMap<String,bool>;
 
@@ -27,7 +29,7 @@ pub struct TagDescriptor
 /** derived data object representing combined entry data and associated tag data. */
 pub struct TagEntry
 {
-    // pub data:
+    pub data:EntryData,
     pub tagData:TagData,
 
     pub missingTags:Vec<String>,
@@ -35,3 +37,6 @@ pub struct TagEntry
     pub outdated:bool,
     pub numberOutdated:u32
 }
+
+/** vector of TagEntries. could be replaced by a hashmap sometime. */
+pub type TagEntries=Vec<TagEntry>;

@@ -2,3 +2,4 @@
 
 pub mod datafile;
 pub mod types;
+pub mod tag_entry;
