@@ -1,12 +1,16 @@
 // !! CROSS LANGUAGE TYPES
 // !! mirrors entry-data-types.d.ts
 
+use serde::{Deserialize,Serialize};
+
+#[derive(Deserialize,Serialize,Debug)]
 pub enum EntryType
 {
     NHENTAI,OTHER,SANKAKU,IMGUR,DLSITE,HITOMI,PIXIV,EXHENTAI,BETASANKAKU
 }
 
 /** current interface for log entry data. */
+#[derive(Deserialize,Serialize,Debug)]
 pub struct EntryData
 {
     pub date:String,
