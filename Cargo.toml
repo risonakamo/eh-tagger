@@ -23,3 +23,7 @@ serde_yaml="0.8.17"
 [[bin]]
 name="testdatafile"
 path="tests/test_data_file.rs"
+
+[[bin]]
+name="testtagfile"
+path="tests/test_tag_file.rs"

@@ -1,0 +1,26 @@
+[
+    {
+        "link":"https://nhentai.net/g/351911/",
+        "tags":{
+            "tag1":true,
+            "tag2":false,
+            "tag3":true
+        }
+    },
+    {
+        "link":"https://chan.sankakucomplex.com/?tags=neocoill",
+        "tags":{
+            "tag1":true,
+            "tag2":true,
+            "tag3":true
+        }
+    },
+    {
+        "link":"https://www.pixiv.net/users/2932467",
+        "tags":{
+            "tag1":false,
+            "tag2":false,
+            "tag3":true
+        }
+    }
+]

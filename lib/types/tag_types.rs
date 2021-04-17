@@ -2,11 +2,13 @@
 /// !! mirrors tag-types.d.ts
 
 use std::collections::HashMap;
+use serde::{Deserialize,Serialize};
 
 /** key: tag name, val: tag present or not */
 pub type TagSet=HashMap<String,bool>;
 
 /** data object representing a set of tags associated with a data entry */
+#[derive(Deserialize,Serialize,Debug)]
 pub struct TagData
 {
     pub link:String,

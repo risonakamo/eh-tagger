@@ -6,7 +6,7 @@ use std::io::BufReader;
 use crate::types::file_types::EntryDataFile;
 
 /// get the entry data file at a certain path.
-fn getDataFile(path:&str)->EntryDataFile
+pub fn getDataFile(path:&str)->EntryDataFile
 {
     let file:File=File::open(path).unwrap();
     let reader:BufReader<File>=BufReader::new(file);
