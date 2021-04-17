@@ -3,6 +3,10 @@ name="eh-tagger"
 version="0.0.0"
 edition="2018"
 
+[lib]
+name="eh_tagger"
+path="lib/lib.rs"
+
 [[bin]]
 name="eh-tagger"
 path="eh-tagger.rs"
