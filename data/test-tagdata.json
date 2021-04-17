@@ -4,7 +4,8 @@
         "tags":{
             "tag1":true,
             "tag2":false,
-            "tag3":true
+            "tag3":true,
+            "tag4":false
         }
     },
     {
@@ -20,7 +21,8 @@
         "tags":{
             "tag1":false,
             "tag2":false,
-            "tag3":true
+            "tag3":true,
+            "tag5":false
         }
     }
 ]

@@ -16,13 +16,15 @@ pub struct TagData
 }
 
 /** represents a tag in a tag schema */
+#[derive(Deserialize,Serialize,Debug)]
 pub struct TagDescriptor
 {
     pub name:String,
+    #[serde(default)]
     pub description:String
 }
 
-/** data object representing combined entry data and associated tag data. */
+/** derived data object representing combined entry data and associated tag data. */
 pub struct TagEntry
 {
     // pub data:
