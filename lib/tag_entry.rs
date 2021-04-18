@@ -11,7 +11,8 @@ use crate::types::tag_types::{TagEntries,TagDescriptor};
 use crate::types::entry_data_types::EntryData;
 use crate::types::tag_types::{TagEntry,TagData};
 
-fn getTagEntrys(entrydataPath:&str,tagdataPath:&str,tagschemaPath:&str)->TagEntries
+/// retrieve tag entries using associated files
+pub fn getTagEntrys(entrydataPath:&str,tagdataPath:&str,tagschemaPath:&str)->TagEntries
 {
     // retrieve all data files
     let entries:EntryDataFile=getDataFile(&entrydataPath);
