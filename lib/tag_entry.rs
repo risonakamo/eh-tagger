@@ -7,19 +7,24 @@ use crate::datafile::tag_file::getTagDataFile;
 use crate::datafile::tag_schema_file::getTagSchemaFile;
 
 use crate::types::file_types::{EntryDataFile,TagDataFile,TagSchemaFile,TagDataMap};
-use crate::types::tag_types::TagEntries;
+use crate::types::tag_types::{TagEntries,TagDescriptor};
 use crate::types::entry_data_types::EntryData;
 use crate::types::tag_types::{TagEntry,TagData};
 
 fn getTagEntrys(entrydataPath:&str,tagdataPath:&str,tagschemaPath:&str)->TagEntries
 {
+    // retrieve all data files
     let entries:EntryDataFile=getDataFile(&entrydataPath);
     let tagdata:TagDataFile=getTagDataFile(&tagdataPath);
     let schemadata:TagSchemaFile=getTagSchemaFile(&tagschemaPath);
 
+    // convert some data files to derived container versions
+    let schemadataSet:HashSet<String>=tagSchemaToSet(schemadata);
     let tagdatamap:TagDataMap=mapTagDataFile(tagdata);
 
+    // keep track of seen entry datas
     let mut seenLinkKeys:HashSet<String>=HashSet::new();
+
     return entries.into_iter().filter_map(|x:EntryData|->Option<TagEntry> {
         // only take one of each link from data
         if seenLinkKeys.contains(&x.link)
@@ -29,15 +34,19 @@ fn getTagEntrys(entrydataPath:&str,tagdataPath:&str,tagschemaPath:&str)->TagEntr
 
         seenLinkKeys.insert(x.link.clone());
 
+        let tagData:TagData=match tagdatamap.get(&x.link) {
+            Some(r)=>r.clone(),
+            None=>TagData::default()
+        };
+
+        let missingTags:Vec<String>=determineMissingTags(&tagData,&schemadataSet);
+
         return Some(TagEntry {
-            tagData:match tagdatamap.get(&x.link) {
-                Some(res)=>res.clone(),
-                None=>TagData::default()
-            },
-            data:x,
-            missingTags:vec![],
-            outdated:false,
-            numberOutdated:0
+            outdated:missingTags.len()>0,
+            numberOutdated:missingTags.len() as u32,
+            missingTags,
+            tagData,
+            data:x
         });
     }).collect();
 }
@@ -61,15 +70,21 @@ fn determineMissingTags(tagdata:&TagData,tagset:&HashSet<String>)->Vec<String>
     let tagdataTags:HashSet<&String>=tagdata.tags.keys().collect();
     let tagset2:HashSet<&String>=tagset.into_iter().collect();
 
-    return tagset2.difference(&tagdataTags).into_iter().map(|x:&&String|->String {
+    return tagset2.difference(&tagdataTags).map(|x:&&String|->String {
         return (*x).clone();
     }).collect();
 }
 
-/// convert the tag schema vector to Set
+/// convert the tag schema vector to Set. consumes tag schema.
 fn tagSchemaToSet(tagschema:TagSchemaFile)->HashSet<String>
 {
-
+    return tagschema.into_iter().fold(
+        HashSet::new(),
+        |mut r:HashSet<String>,x:TagDescriptor|->HashSet<String> {
+            r.insert(x.name);
+            return r;
+        }
+    );
 }
 
 pub mod tests
@@ -78,10 +93,12 @@ pub mod tests
 
     pub fn test()
     {
-        getTagEntrys(
+        let a=getTagEntrys(
             "data/testdata.json",
             "data/test-tagdata.json",
             "data/test-tagschema.yaml"
         );
+
+        println!("{:#?}",a);
     }
 }
