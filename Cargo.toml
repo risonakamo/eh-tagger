@@ -21,13 +21,17 @@ serde_yaml="0.8.17"
 
 # tests
 [[bin]]
-name="testdatafile"
-path="tests/test_data_file.rs"
+name="tagentry"
+path="tests/test_tag_entry.rs"
 
-[[bin]]
-name="testtagfile"
-path="tests/test_tag_file.rs"
+# [[bin]]
+# name="testdatafile"
+# path="tests/test_data_file.rs"
 
-[[bin]]
-name="testschemafile"
-path="tests/test_tag_schema_file.rs"
+# [[bin]]
+# name="testtagfile"
+# path="tests/test_tag_file.rs"
+
+# [[bin]]
+# name="testschemafile"
+# path="tests/test_tag_schema_file.rs"
