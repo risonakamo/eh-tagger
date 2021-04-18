@@ -10,7 +10,7 @@ use super::entry_data_types::EntryData;
 pub type TagSet=HashMap<String,bool>;
 
 /** data object representing a set of tags associated with a data entry */
-#[derive(Deserialize,Serialize,Debug)]
+#[derive(Deserialize,Serialize,Debug,Default,Clone)]
 pub struct TagData
 {
     pub link:String,
