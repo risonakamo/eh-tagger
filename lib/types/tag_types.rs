@@ -41,3 +41,11 @@ pub struct TagEntry
 
 /** vector of TagEntries. could be replaced by a hashmap sometime. */
 pub type TagEntries=Vec<TagEntry>;
+
+/** request to update tags for a TagEntry */
+#[derive(Deserialize,Serialize,Debug)]
+pub struct TagUpdate
+{
+    pub link:String,
+    pub tags:TagSet
+}

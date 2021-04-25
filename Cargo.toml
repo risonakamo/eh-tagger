@@ -21,8 +21,11 @@ serde_yaml="0.8.17"
 
 # tests
 [[bin]]
-name="tagentry"
-path="tests/test_tag_entry.rs"
+name="tagupdate"
+path="tests/test_tagupdate.rs"
+
+# name="tagentry"
+# path="tests/test_tag_entry.rs"
 
 # [[bin]]
 # name="testdatafile"
