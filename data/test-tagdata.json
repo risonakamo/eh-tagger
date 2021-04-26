@@ -2,29 +2,43 @@
   {
     "link": "https://nhentai.net/g/351911/",
     "tags": {
+      "tag4": false,
       "tag3": true,
       "tag2": false,
-      "tag4": false,
       "tag1": true
     }
   },
   {
     "link": "https://chan.sankakucomplex.com/?tags=neocoill",
     "tags": {
+      "tag1": true,
       "asda": false,
       "something": false,
-      "tag2": true,
       "tag3": true,
-      "tag1": true
+      "tag2": true
     }
   },
   {
     "link": "https://www.pixiv.net/users/2932467",
     "tags": {
       "tag3": true,
+      "tag2": false,
       "tag1": false,
-      "tag5": false,
-      "tag2": false
+      "tag5": false
+    }
+  },
+  {
+    "link": "a new key",
+    "tags": {
+      "something": false
+    }
+  },
+  {
+    "link": "a new key2",
+    "tags": {
+      "something3": true,
+      "something": true,
+      "something2": false
     }
   }
 ]

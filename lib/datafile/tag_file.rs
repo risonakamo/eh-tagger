@@ -22,11 +22,24 @@ pub fn updateTagFile(path:&str,update:TagUpdate)
 {
     let mut tagfile:TagDataFile=getTagDataFile(path);
 
-    let item:&mut TagData=tagfile.iter_mut().find(|x:&&mut TagData|->bool {
+    let item:Option<&mut TagData>=tagfile.iter_mut().find(|x:&&mut TagData|->bool {
         return x.link==update.link;
-    }).unwrap();
+    });
 
-    item.tags.extend(update.tags);
+    match item
+    {
+        Some(r)=>{
+            r.tags.extend(update.tags);
+        }
+
+        None=>{
+            tagfile.push(TagData {
+                link:update.link,
+                tags:update.tags
+            });
+        }
+    }
+
     writeTagDataFile(path,tagfile);
 }
 
@@ -53,9 +66,12 @@ pub mod tests
     pub fn test2()
     {
         updateTagFile("data/test-tagdata.json",TagUpdate {
-            link:"https://chan.sankakucomplex.com/?tags=neocoill".to_string(),
+            link:"a new key2".to_string(),
             tags:vec![
-                ("something".to_string(),false)
+                ("something".to_string(),false),
+                ("something2".to_string(),false),
+                ("something".to_string(),true),
+                ("something3".to_string(),true)
             ].into_iter().collect()
         });
     }
