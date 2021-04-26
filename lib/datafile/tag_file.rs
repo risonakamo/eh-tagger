@@ -1,7 +1,7 @@
 // functions for manipulating tag data file json
 
 use std::fs::File;
-use std::io::BufReader;
+use std::io::{BufReader,BufWriter};
 
 use crate::types::file_types::TagDataFile;
 use crate::types::tag_types::{TagUpdate,TagData};
@@ -26,15 +26,17 @@ pub fn updateTagFile(path:&str,update:TagUpdate)
         return x.link==update.link;
     }).unwrap();
 
-    item.tags.insert("asda".to_string(),false);
-    println!("{:#?}",item);
-    println!("{:#?}",tagfile);
+    item.tags.extend(update.tags);
+    writeTagDataFile(path,tagfile);
 }
 
 /// write out the tag data file to the path. consumes.
 fn writeTagDataFile(path:&str,tagfile:TagDataFile)
 {
+    let file:File=File::create(path).unwrap();
+    let writer:BufWriter<File>=BufWriter::new(file);
 
+    serde_json::to_writer_pretty(writer,&tagfile).unwrap();
 }
 
 pub mod tests
