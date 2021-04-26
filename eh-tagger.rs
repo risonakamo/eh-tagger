@@ -28,7 +28,8 @@ fn api_getTagEntries()->JsonValue
 fn api_updateTag(request:Json<TagUpdate>)->JsonValue
 {
     let tagupdate:TagUpdate=request.into_inner();
-    updateTagFile("data/testdata.json",tagupdate);
+    // TODO: make this configurable
+    updateTagFile("data/test-tagdata.json",tagupdate);
     return json!("complete");
 }
 

@@ -11,19 +11,19 @@
   {
     "link": "https://chan.sankakucomplex.com/?tags=neocoill",
     "tags": {
-      "tag1": true,
-      "asda": false,
       "something": false,
       "tag3": true,
-      "tag2": true
+      "tag1": true,
+      "tag2": true,
+      "asda": false
     }
   },
   {
     "link": "https://www.pixiv.net/users/2932467",
     "tags": {
       "tag3": true,
-      "tag2": false,
       "tag1": false,
+      "tag2": false,
       "tag5": false
     }
   },
@@ -36,9 +36,15 @@
   {
     "link": "a new key2",
     "tags": {
-      "something3": true,
+      "something2": false,
       "something": true,
-      "something2": false
+      "something3": true
+    }
+  },
+  {
+    "link": "asdads",
+    "tags": {
+      "hey": false
     }
   }
 ]
