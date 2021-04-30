@@ -27,7 +27,7 @@ pub struct TagDescriptor
 }
 
 /** derived data object representing combined entry data and associated tag data. */
-#[derive(Deserialize,Serialize,Debug)]
+#[derive(Deserialize,Serialize,Debug,Clone)]
 pub struct TagEntry
 {
     pub data:EntryData,

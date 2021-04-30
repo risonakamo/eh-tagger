@@ -3,14 +3,14 @@
 
 use serde::{Deserialize,Serialize};
 
-#[derive(Deserialize,Serialize,Debug)]
+#[derive(Deserialize,Serialize,Debug,Clone)]
 pub enum EntryType
 {
     NHENTAI,OTHER,SANKAKU,IMGUR,DLSITE,HITOMI,PIXIV,EXHENTAI,BETASANKAKU
 }
 
 /** current interface for log entry data. */
-#[derive(Deserialize,Serialize,Debug)]
+#[derive(Deserialize,Serialize,Debug,Clone)]
 pub struct EntryData
 {
     pub date:String,

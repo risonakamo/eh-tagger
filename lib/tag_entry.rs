@@ -1,6 +1,8 @@
 // functions for working with TagEntrys
 
 use std::collections::{HashMap,HashSet};
+use rand::thread_rng;
+use rand::seq::SliceRandom;
 
 use crate::datafile::entry_data_file::getDataFile;
 use crate::datafile::tag_file::getTagDataFile;
@@ -50,6 +52,20 @@ pub fn getTagEntrys(entrydataPath:&str,tagdataPath:&str,tagschemaPath:&str)->Tag
             data:x
         });
     }).collect();
+}
+
+/// return a random tag entry that has missing tags
+pub fn randomTagEntry(entrydataPath:&str,tagdataPath:&str,tagschemaPath:&str)->Option<TagEntry>
+{
+    let entries:TagEntries=getTagEntrys(entrydataPath,tagdataPath,tagschemaPath);
+
+    return match entries.into_iter().filter(|x:&TagEntry|->bool {
+        return x.outdated;
+    }).collect::<TagEntries>().choose(&mut thread_rng())
+    {
+        Some(r)=>Some(r.clone()),
+        None=>None
+    };
 }
 
 /// convert TagDataFile into TagDataMap. CONSUMES the tag data.
