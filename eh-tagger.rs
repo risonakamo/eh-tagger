@@ -6,7 +6,7 @@ use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::json::{JsonValue,Json};
 use rocket_contrib::json;
 
-use eh_tagger::tag_entry::getTagEntrys;
+use eh_tagger::tag_entry::{getTagEntrys,randomTagEntry};
 use eh_tagger::datafile::tag_file::updateTagFile;
 
 use eh_tagger::types::tag_types::TagUpdate;
@@ -16,11 +16,23 @@ use eh_tagger::types::tag_types::TagUpdate;
 fn api_getTagEntries()->JsonValue
 {
     // TODO: make these configurable paths
-    json!(getTagEntrys(
+    return json!(getTagEntrys(
         "data/testdata.json",
         "data/test-tagdata.json",
         "data/test-tagschema.yaml"
-    ))
+    ));
+}
+
+/// get random entry with missing tags.
+#[get("/get-random-entry")]
+fn api_getRandomEntry()->JsonValue
+{
+    // TODO: make these configurable paths
+    return json!(randomTagEntry(
+        "data/testdata.json",
+        "data/test-tagdata.json",
+        "data/test-tagschema.yaml"
+    ));
 }
 
 /// update the tag file.
@@ -37,6 +49,6 @@ fn main()
 {
     rocket::ignite()
         .mount("/",StaticFiles::from("web"))
-        .mount("/",rocket::routes![api_getTagEntries,api_updateTag])
+        .mount("/",rocket::routes![api_getTagEntries,api_updateTag,api_getRandomEntry])
         .launch();
 }
